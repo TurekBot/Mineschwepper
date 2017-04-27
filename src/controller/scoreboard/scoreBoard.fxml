@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import controller.scoreboard.BombCounter?>
+<fx:root type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.111"
+         xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <BombCounter text="BOMB"/>
+    </children>
+
+</fx:root>
