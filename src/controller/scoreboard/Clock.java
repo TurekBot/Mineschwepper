@@ -47,7 +47,7 @@ public class Clock extends Label {
      * displays externally.
      */
     public void decrement() {
-        timeProperty.subtract(1);
+        timeProperty.set(timeProperty.get() - 1);
     }
 
 //    @FXML

@@ -51,7 +51,7 @@ public class ScoreBoard extends BorderPane {
 
     @FXML
     private void turnItUp() {
-        bombCounter.increment();
+        bombCounter.decrement();
         clock.increment();
     }
 

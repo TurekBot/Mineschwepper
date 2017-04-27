@@ -43,7 +43,7 @@ public class BombCounter extends Label {
      * displays externally.
      */
     public void decrement() {
-        bombProperty.subtract(1);
+        bombProperty.set(bombProperty.get() - 1);
     }
 
 //    @FXML

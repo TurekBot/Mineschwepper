@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.BorderPane?>
 
 
-<fx:root stylesheets="@../../resources/styles.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root prefWidth="500.0" stylesheets="@../../resources/styles.css" type="BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <left>
        <BombCounter fx:id="bombCounter" prefWidth="70.0" styleClass="digital" BorderPane.alignment="CENTER_LEFT" />
    </left>
