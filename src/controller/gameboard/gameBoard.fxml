@@ -13,7 +13,7 @@
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
             </padding>
-        </>
+        </ScoreBoard>
     </top>
     <center>
         <TilePane prefHeight="500.0" prefWidth="500.0">
