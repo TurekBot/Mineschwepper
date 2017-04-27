@@ -35,7 +35,7 @@ public class BombCounter extends Label {
      * displays externally.
      */
     public void increment() {
-        bombProperty.add(1);
+        bombProperty.set(bombProperty.get() + 1);
     }
 
     /**

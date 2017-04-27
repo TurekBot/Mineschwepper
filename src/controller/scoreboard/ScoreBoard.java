@@ -18,6 +18,12 @@ public class ScoreBoard extends HBox {
     @FXML
     private BombCounter bombCounter;
 
+    /**
+     * In normal mode, acts as a stop watch, counting up to see how long it takes the player to win.
+     */
+    @FXML
+    private Clock clock;
+
 //    /**
 //     * At the beginning of a game, this displays the word "start", but during a game,
 //     * to make the tension mount, shows a face.
@@ -47,6 +53,10 @@ public class ScoreBoard extends HBox {
 
     }
 
+    @FXML
+    private void turnItUp() {
+        bombCounter.increment();
+    }
 
 }
 

@@ -35,6 +35,11 @@ public class GameBoard extends BorderPane{
         }
     }
 
+    @FXML
+    void initialize() {
+        scoreBoard.getStyleClass();
+    }
+
 
 }
 

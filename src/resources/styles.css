@@ -1,0 +1,9 @@
+/*Add a custom font.*/
+@font-face {
+    src: url("digital-7-mono.ttf");
+}
+
+.digital >  {
+    -fx-font-family: "Digital-7 Mono";
+    -fx-font-size: 38
+}

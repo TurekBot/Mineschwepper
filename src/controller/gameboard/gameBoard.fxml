@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import controller.scoreboard.ScoreBoard?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.TilePane?>
-<?import controller.scoreboard.ScoreBoard ?>
 
-
-<fx:root type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8.0.111"
-         xmlns:fx="http://javafx.com/fxml/1">
+<fx:root stylesheets="@../../resources/styles.css" type="javafx.scene.layout.BorderPane" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
     <top>
-        <ScoreBoard BorderPane.alignment="CENTER">
+        <ScoreBoard fx:id="scoreBoard" BorderPane.alignment="CENTER">
             <padding>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
             </padding>
         </ScoreBoard>
     </top>
     <center>
         <TilePane prefHeight="500.0" prefWidth="500.0">
             <BorderPane.margin>
-                <Insets/>
+                <Insets />
             </BorderPane.margin>
         </TilePane>
     </center>
