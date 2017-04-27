@@ -2,14 +2,15 @@ package controller.scoreboard;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 
 /**
  * Displays the number of bombs, the start button, and a clock.
  */
-public class ScoreBoard extends HBox {
+public class ScoreBoard extends BorderPane {
 
     /**
      * Counts how many flags the player has placed (which, if they want to win
@@ -18,24 +19,19 @@ public class ScoreBoard extends HBox {
     @FXML
     private BombCounter bombCounter;
 
+
     /**
-     * In normal mode, acts as a stop watch, counting up to see how long it takes the player to win.
+     * At the beginning of a game, this displays the word "start", but during a game,
+     * to make the tension mount, shows a face.
+     */
+    @FXML
+    private Button middleButton;
+
+    /**
+     * In normal mode, this counts up to track how long it takes the player to win.
      */
     @FXML
     private Clock clock;
-
-//    /**
-//     * At the beginning of a game, this displays the word "start", but during a game,
-//     * to make the tension mount, shows a face.
-//     */
-//    @FXML
-//    private Button middleButton;
-//
-//    /**
-//     * In normal mode, this counts up to track how long it takes the player to win.
-//     */
-//    @FXML
-//    private Clock clock;
 
 
     public ScoreBoard() {
@@ -56,6 +52,7 @@ public class ScoreBoard extends HBox {
     @FXML
     private void turnItUp() {
         bombCounter.increment();
+        clock.increment();
     }
 
 }

@@ -39,7 +39,7 @@ public class Clock extends Label {
      * displays externally.
      */
     public void increment() {
-        timeProperty.add(1);
+        timeProperty.set(timeProperty.get() + 1);
     }
 
     /**
