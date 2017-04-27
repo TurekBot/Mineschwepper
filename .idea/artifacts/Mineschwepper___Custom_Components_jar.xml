@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Mineschwepper - Custom Components:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Mineschwepper___Custom_Components_jar</output-path>
+    <root id="archive" name="MineschwepperCustomComponents.jar">
+      <element id="module-output" name="Turek-Bradley-Assn8" />
+    </root>
+  </artifact>
+</component>
