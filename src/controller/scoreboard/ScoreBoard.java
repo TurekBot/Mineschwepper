@@ -1,11 +1,7 @@
 package controller.scoreboard;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
 import java.io.IOException;
@@ -41,6 +37,7 @@ public class ScoreBoard extends HBox {
                 "scoreBoard.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
+        fxmlLoader.setClassLoader(getClass().getClassLoader());
 
         try {
             fxmlLoader.load();

@@ -26,6 +26,7 @@ public class GameBoard extends BorderPane{
                 "gameBoard.fxml"));
         fxmlLoader.setRoot(this);
         fxmlLoader.setController(this);
+        fxmlLoader.setClassLoader(getClass().getClassLoader());
 
         try {
             fxmlLoader.load();
