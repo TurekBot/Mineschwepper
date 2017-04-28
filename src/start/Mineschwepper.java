@@ -21,6 +21,9 @@ public class Mineschwepper extends Application {
         GameBoard gameBoard = new GameBoard();
 
         primaryStage.setScene(new Scene(gameBoard));
+
+        primaryStage.setResizable(false);
+        primaryStage.sizeToScene();
         primaryStage.show();
     }
 }

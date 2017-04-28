@@ -7,3 +7,48 @@
     -fx-font-family: "Digital-7 Mono";
     -fx-font-size: 38
 }
+
+#map {
+    -fx-border-width: 1;
+    -fx-border-color: lightgray;
+}
+
+.cell {
+    -fx-min-height:30px;
+    -fx-min-width:30px;
+    -fx-max-height:30px;
+    -fx-max-width:30px;
+
+    -fx-padding: 0;
+    -fx-spacing: 0;
+}
+
+.cell:focused {
+    -fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 5, 4, 3;
+}
+
+/*Any cell that's been revealed (clicked)*/
+.revealed {
+    -fx-effect: null;
+}
+
+/*Defines a cell that's been marked with a '?'*/
+.questionable {
+    -fx-graphic: url("Question-Mark-Filled-20.png");
+}
+
+
+.flag {
+    -fx-graphic: url("Flag-2-Filled-20.png");
+}
+
+/*Defines a mine*/
+.mine {
+    -fx-graphic: url("Naval-Mine-Filled-20.png");
+}
+
+
+
+

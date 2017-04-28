@@ -14,7 +14,7 @@
         </ScoreBoard>
     </top>
     <center>
-        <TilePane prefHeight="500.0" prefWidth="500.0">
+        <TilePane fx:id="map" minHeight="300.0" minWidth="300.0" prefColumns="20" prefRows="20">
             <BorderPane.margin>
                 <Insets />
             </BorderPane.margin>
