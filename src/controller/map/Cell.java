@@ -28,7 +28,7 @@ public class Cell extends StackPane {
 
 
     public enum Mark {
-        BLANK, FLAG, QUESTIONABLE;
+        BLANK, FLAG, QUESTIONABLE
     }
     //Initially, all should be blank
     private Mark mark = Mark.BLANK;
@@ -49,6 +49,9 @@ public class Cell extends StackPane {
     }
 
     private void initContents() {
+        //Style the contents with the same paddinglessness and size
+        contents.getStyleClass().add("cell");
+
         //If the text is a one, the css id will be a one, and that will color it appropriately.
         contents.idProperty().bind(contents.textProperty());
 
