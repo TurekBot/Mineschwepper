@@ -7,6 +7,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -14,28 +15,25 @@ import java.util.Random;
  */
 public class Cell extends StackPane {
 
-    public Button tapa = new Button();
+    /**
+     * The clickable part. Left-clicking reveals, right-clicking cycle's the mark.
+     */
+    private Button tapa = new Button();
 
     /**
      * Either a hint to how many mines are around, or, you guessed it, a mine.
      */
-    private Label contents = new Label("1");
+    private Label contents = new Label();
 
-    /**
-     * Turns cell into a mine.
-     */
-    public void setMine() {
-        //Hopefully, this sould style it too, because the text is bound to the id.
-        contents.setText("mine");
-    }
 
 
     public enum Mark {
-        BLANK, FLAG, QUESTIONABLE,
+        BLANK, FLAG, QUESTIONABLE;
     }
-
+    //Initially, all should be blank
     private Mark mark = Mark.BLANK;
 
+    //This can be changed, but it won't do anything; really, what changes the size is the CSS
     private static final int CELL_SIZE = 10;
 
     public Cell() {
@@ -51,8 +49,6 @@ public class Cell extends StackPane {
     }
 
     private void initContents() {
-        Random rand = new Random();
-        contents.setText(String.valueOf(rand.nextInt(9)));
         //If the text is a one, the css id will be a one, and that will color it appropriately.
         contents.idProperty().bind(contents.textProperty());
 
@@ -98,6 +94,22 @@ public class Cell extends StackPane {
         });
     }
 
+    /**
+     * Turns cell into a mine.
+     */
+    public void setMine() {
+        //Hopefully, this sould style it too, because the text is bound to the id.
+        contents.setText("mine");
+    }
+
+    /**
+     * The hint tells the player how many of the 8 squares this cell is touching have a mine in them.
+     * @param number the number of mines touched by this cell
+     */
+    public void setHint(String number) {
+        contents.setText(number);
+    }
+
     public Mark getMark() {
         return mark;
     }
@@ -108,5 +120,12 @@ public class Cell extends StackPane {
 
     public static int getCellSize() {
         return CELL_SIZE;
+    }
+
+    /**
+     * @return true if this cell contains a mine
+     */
+    public boolean isAMine() {
+        return Objects.equals("mine", contents.getText());
     }
 }

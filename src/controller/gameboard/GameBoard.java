@@ -9,7 +9,6 @@ import javafx.scene.layout.TilePane;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Random;
 
 /**
  * Contains the score board and the map. Also controls the game play?
@@ -54,6 +53,13 @@ public class GameBoard extends BorderPane{
     void initialize() {
 
         //Set up map
+        initCells();
+
+
+
+    }
+
+    private void initCells() {
 
         //Make all the cells
         for (int i = 0; i < Options.getCellCount(); i++){
@@ -72,6 +78,7 @@ public class GameBoard extends BorderPane{
         //Add the cellList to the map
         map.getChildren().setAll(cellList);
 
+        cellList.plotHints();
     }
 
 
