@@ -9,6 +9,8 @@ public class Options {
     private static double bombPercentage = 0.25;
 
     private static int bombCount = (int) (cellCount * bombPercentage);
+    
+    private static int mustRevealCount = (cellCount - bombCount);
 
 
     public static int getCellCount() {
@@ -33,5 +35,13 @@ public class Options {
 
     public static void setBombCount(int bombCount) {
         Options.bombCount = bombCount;
+    }
+
+    public static int getMustRevealCount() {
+        return mustRevealCount;
+    }
+
+    public static void setMustRevealCount(int mustRevealCount) {
+        Options.mustRevealCount = mustRevealCount;
     }
 }

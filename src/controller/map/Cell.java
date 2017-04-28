@@ -1,5 +1,7 @@
 package controller.map;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
@@ -25,6 +27,13 @@ public class Cell extends StackPane {
      */
     private Label contents = new Label();
 
+    public Button getTapa() {
+        return tapa;
+    }
+
+    public Label getContents() {
+        return contents;
+    }
 
 
     public enum Mark {
@@ -65,19 +74,14 @@ public class Cell extends StackPane {
         tapa.setShape(new Rectangle(CELL_SIZE, CELL_SIZE));
         tapa.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 
-        //Handle a click-to-reveal
-        tapa.setOnAction(action -> {
-                    Button tapa = (Button) action.getSource();
-                    tapa.getStyleClass().add("revealed");
-                    tapa.setVisible(false);
-                }
-        );
 
-        //Handle the investigation marking
+        //Handle the investigation marking (right-clicks only)
         tapa.setOnMouseClicked(event -> {
+
+            if (event.getButton() == MouseButton.SECONDARY) {
             Button btn = (Button) event.getSource();
             Cell cell = (Cell) btn.getParent();
-            if (event.getButton() == MouseButton.SECONDARY) {
+            System.out.println("RIGHT");
                 switch (cell.getMark()) {
                     case BLANK:
                         btn.setId("flagged");
@@ -97,6 +101,11 @@ public class Cell extends StackPane {
         });
     }
 
+
+    public void setOnAction(EventHandler<ActionEvent> eventHandler) {
+        //I think I'll set it on the tapa because that's the clickable part
+        tapa.setOnAction(eventHandler);
+    }
     /**
      * Turns cell into a mine.
      */
