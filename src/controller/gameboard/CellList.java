@@ -84,6 +84,71 @@ public class CellList extends ArrayList<Cell> {
      */
     private Cell neighborOnThe(Direction direction, int middleCell) throws IndexOutOfBoundsException {
 //        System.out.println("Checking neighbor at " + (direction.offset + middleCell));
+
+        //If we're on the edge, don't consider our "neighbor" that is wrapped around onto the other side
+
+        //On the west side
+        if (hasFalseWesternNeighbor(direction, middleCell)) {
+            throw new IndexOutOfBoundsException("False Western Neighbor");
+        }
+
+        //On the east side
+        if (hasFalseEasternNeighbor(direction, middleCell)) {
+            throw new IndexOutOfBoundsException("False Eastern Neighbor");
+        }
+
+        //Otherwise, assuming our neighbor is real, return them
         return this.get(direction.offset + middleCell);
     }
+
+    /**
+     * Checks if our supposed neighbor is real or not.
+     * @param direction the direction our supposed neighbor lives in
+     * @param middleCell us
+     * @return true if our neighbor isn't our neighbor
+     */
+    private boolean hasFalseWesternNeighbor(Direction direction, int middleCell) {
+
+        boolean imOnTheWesternEdge = false;
+
+        boolean wereCheckingAWesternNeighbor;
+
+
+        //We know we're on the west edge if our location modulo 20 is 0.
+        // (We have to check if we're at 0 because apparently you can't modulo by 0. Pft: Maths.)
+        imOnTheWesternEdge = (middleCell == 0) || ((middleCell % 20) == 0);
+
+        wereCheckingAWesternNeighbor = ((direction == Direction.NW) ||
+                (direction == Direction.W) ||
+                (direction == Direction.SW));
+        
+        return imOnTheWesternEdge && wereCheckingAWesternNeighbor;
+    }
+
+    /**
+     * Checks if our supposed neighbor is real or not.
+     * @param direction the direction our supposed neighbor lives in
+     * @param middleCell us
+     * @return true if our neighbor isn't our neighbor
+     */
+    private boolean hasFalseEasternNeighbor(Direction direction, int middleCell) {
+
+        boolean imOnTheEasternEdge = false;
+
+        boolean wereCheckingAnEasternNeighbor;
+
+
+        //We know we're on the east edge if our location modulo 20 is 19.
+        // (We have to check if we're at 0 because apparently you can't modulo by 0. Pft: Maths.)
+        if (middleCell != 0) {
+            imOnTheEasternEdge = ((middleCell % 20) == 19);
+        }
+
+        wereCheckingAnEasternNeighbor = ((direction == Direction.NE) ||
+                (direction == Direction.E) ||
+                (direction == Direction.SE));
+
+        return imOnTheEasternEdge && wereCheckingAnEasternNeighbor;
+    }
+    
 }
