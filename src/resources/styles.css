@@ -35,18 +35,59 @@
 }
 
 /*Defines a cell that's been marked with a '?'*/
-.questionable {
+#questionable {
     -fx-graphic: url("Question-Mark-Filled-20.png");
 }
 
 
-.flag {
+#flagged {
     -fx-graphic: url("Flag-2-Filled-20.png");
 }
 
-/*Defines a mine*/
-.mine {
+
+#mine {
     -fx-graphic: url("Naval-Mine-Filled-20.png");
+}
+
+#blank {
+
+}
+
+/*Number colors*/
+.root {
+    color-1: #297045;
+    color-2: #a62639;
+    color-3: #3d315b;
+ }
+
+.contents {
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+}
+
+#1 {
+    -fx-text-fill: #bfae48;
+}
+#2 {
+    -fx-text-fill: #5fad41;
+}
+#3 {
+    -fx-text-fill: #2d936c;
+}
+#4 {
+    -fx-text-fill: #391463;
+}
+#5 {
+    -fx-text-fill: #3a0842;
+}
+#6 {
+    -fx-text-fill: derive(#bfae48, -50%);
+}
+#7 {
+    -fx-text-fill: derive(#5fad41, -50%);
+}
+#8 {
+    -fx-text-fill: derive(#2d936c, -50%);
 }
 
 

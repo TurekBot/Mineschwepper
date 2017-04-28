@@ -53,7 +53,7 @@ public class GameBoard extends BorderPane{
             Random r = new Random();
 //            if (r.nextInt() % 2 == 0) c.getStyleClass().add("flag");
 //            if (r.nextInt() % 3 == 0) c.getStyleClass().add("questionable");
-            if (r.nextInt() % 17 == 0) c.getStyleClass().add("mine");
+            if (r.nextInt() % 17 == 0) c.setId("mine");
             map.getChildren().add(c);
         }
 
