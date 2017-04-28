@@ -8,6 +8,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.TilePane;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Random;
 
 /**
@@ -23,10 +24,15 @@ public class GameBoard extends BorderPane{
     private ScoreBoard scoreBoard;
 
     /**
-     * Contains all of the cells.
+     * Visually contains all of the cells.
      */
     @FXML
     private TilePane map;
+
+    /**
+     * Keeps track of all of the cells; convenient access to them.
+     */
+    private CellList cellList = new CellList();
 
 
 
@@ -48,14 +54,23 @@ public class GameBoard extends BorderPane{
     void initialize() {
 
         //Set up map
-        for (int i = 0; i < Options.getCellCount(); i ++){
+
+        //Make all the cells
+        for (int i = 0; i < Options.getCellCount(); i++){
             Cell c = new Cell();
-            Random r = new Random();
-//            if (r.nextInt() % 2 == 0) c.getStyleClass().add("flag");
-//            if (r.nextInt() % 3 == 0) c.getStyleClass().add("questionable");
-            if (r.nextInt() % 17 == 0) c.setId("mine");
-            map.getChildren().add(c);
+            cellList.add(c);
         }
+
+        //Turn a certain percentage of them into bombs
+        for (int i = 0; i < Options.getBombCount(); i++){
+            cellList.get(i).setMine();
+        }
+
+        //Shuffle them
+        Collections.shuffle(cellList);
+
+        //Add the cellList to the map
+        map.getChildren().setAll(cellList);
 
     }
 

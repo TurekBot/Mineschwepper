@@ -21,6 +21,13 @@ public class Cell extends StackPane {
      */
     private Label contents = new Label("1");
 
+    /**
+     * Turns cell into a mine.
+     */
+    public void setMine() {
+        //Hopefully, this sould style it too, because the text is bound to the id.
+        contents.setText("mine");
+    }
 
 
     public enum Mark {
