@@ -126,7 +126,7 @@ public class GameBoard extends BorderPane {
                 //Simply check if the user has revealed the right number of cells
                 if (revealedList.size() == Options.getMustRevealCount()) {
                     System.out.println("You won!");
-                    // TODO: 4/28/17  winSequence();
+                    gameover("winner");
                 }
             }
         });
@@ -169,7 +169,7 @@ public class GameBoard extends BorderPane {
         };
     }
 
-    private void gameover(String win_lose) {
+    private void gameover(String winnerOrLoser) {
         //Stop the timer
         int time = scoreBoard.stopTimer();
 
@@ -177,9 +177,15 @@ public class GameBoard extends BorderPane {
 
 
         //if player won
+        if (winnerOrLoser.equals("winner")) {
+
+        }
 
 
         //if player lost
+        if (winnerOrLoser.equals("loser")) {
+
+        }
 
 
     }
