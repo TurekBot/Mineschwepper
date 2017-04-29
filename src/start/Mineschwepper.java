@@ -4,6 +4,7 @@ package start;
 import controller.gameboard.GameBoard;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -22,6 +23,11 @@ public class Mineschwepper extends Application {
 
         primaryStage.setScene(new Scene(gameBoard));
 
+        primaryStage.getIcons().add(new Image(
+                getClass().getResourceAsStream("../resources/Naval-Mine-Filled-100.png")
+        ));
+
+        primaryStage.setTitle("Mineschwepper");
         primaryStage.setResizable(false);
         primaryStage.sizeToScene();
         primaryStage.show();
