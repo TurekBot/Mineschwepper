@@ -111,6 +111,7 @@ public class GameBoard extends BorderPane {
             @Override
             public void invalidated(Observable observable) {
                 scoreBoard.startClock();
+                scoreBoard.getMiddleButton().setDisable(false);
                 revealedList.removeListener(this);
             }
         };
@@ -131,6 +132,7 @@ public class GameBoard extends BorderPane {
                 }
             }
         });
+
 
 
     }
@@ -179,17 +181,19 @@ public class GameBoard extends BorderPane {
 
         //if player won
         if (winnerOrLoser.equals("winner")) {
-            Alert winner = new Alert(Alert.AlertType.NONE);
+            Alert winner = new Alert(Alert.AlertType.INFORMATION);
             winner.setHeaderText("You won!");
             winner.setContentText("You finished in " + time + " seconds.");
+            winner.show();
         }
 
 
         //if player lost
         if (winnerOrLoser.equals("loser")) {
-            Alert loser = new Alert(Alert.AlertType.NONE);
+            Alert loser = new Alert(Alert.AlertType.INFORMATION);
             loser.setHeaderText("Sorry, you lost!");
             loser.setContentText("Better luck next time!");
+            loser.show();
 
         }
 
@@ -295,10 +299,26 @@ public class GameBoard extends BorderPane {
 
         initGamePlay();
 
+        scoreBoard.setOnMiddleButtonAction(reset -> {
+            //set clock to 0
+            scoreBoard.stopTimer();
+
+            //reset bomb count
+            scoreBoard.resetBombCount();
+
+            //reset map
+
+            initCells();
+            initGamePlay();
+
+        });
+
 
     }
 
     private void initCells() {
+
+        cellList.clear();
 
         //Make all the cells
         for (int i = 0; i < Options.getCellCount(); i++) {

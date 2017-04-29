@@ -1,10 +1,12 @@
 package controller.scoreboard;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 
+import java.beans.EventHandler;
 import java.io.IOException;
 
 /**
@@ -50,10 +52,14 @@ public class ScoreBoard extends BorderPane {
     }
 
     @FXML
-    private void turnItUp() {
-        bombCounter.decrement();
-        clock.increment();
+    void initialize() {
+        middleButton.setDisable(true);
     }
+
+    public void setOnMiddleButtonAction(javafx.event.EventHandler<ActionEvent> eventHandler) {
+        middleButton.setOnAction(eventHandler);
+    }
+
 
     public void startClock() {
         clock.start();
@@ -69,6 +75,14 @@ public class ScoreBoard extends BorderPane {
 
     public int stopTimer() {
         return clock.stop();
+    }
+
+    public Button getMiddleButton() {
+        return middleButton;
+    }
+
+    public void resetBombCount() {
+        bombCounter.reset();
     }
 }
 

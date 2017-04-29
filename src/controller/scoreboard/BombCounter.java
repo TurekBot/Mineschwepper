@@ -58,6 +58,10 @@ public class BombCounter extends Label {
         Platform.runLater(() -> bombProperty.set(bombProperty.get() - 1));
     }
 
+    public void reset() {
+        bombProperty.set(Options.getBombCount());
+    }
+
 //    @FXML
 //    protected void doSomething() {
 //        System.out.println("The button was clicked!");

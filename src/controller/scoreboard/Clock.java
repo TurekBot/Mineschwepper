@@ -50,12 +50,8 @@ public class Clock extends Label {
      * the delay and period for the timer is when we start it.
      */
     private void initTimer() {
-        countUp = new TimerTask() {
-            @Override
-            public void run() {
-                increment();
-            }
-        };
+//        countUp =
+//        };
     }
 
     /**
@@ -89,7 +85,18 @@ public class Clock extends Label {
      * Causes the clock to start keeping time like a stopwatch, counting up every 1 second (1000 miliseconds)
      */
     public void start() {
-        timer.scheduleAtFixedRate(countUp, 0, 1000);
+        timeProperty.set(0);
+        timer = new Timer();
+        timer.scheduleAtFixedRate(
+
+                new TimerTask() {
+                    @Override
+                    public void run() {
+                        increment();
+                    }
+                }
+
+                , 0, 1000);
     }
 
     public int stop() {
