@@ -2,6 +2,8 @@ package controller.gameboard;
 
 import controller.map.Cell;
 import controller.scoreboard.ScoreBoard;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -91,6 +93,16 @@ public class GameBoard extends BorderPane{
      */
     private void initGamePlay() {
 
+        //This will help us know when the user has started
+        revealedList.addListener(new InvalidationListener() {
+            @Override
+            public void invalidated(Observable observable) {
+                scoreBoard.startClock();
+                revealedList.removeListener(this);
+            }
+        });
+
+        //This will help us determine if the user has won.
         revealedList.addListener(new ListChangeListener<Cell>() {
             @Override
             public void onChanged(Change<? extends Cell> c) {

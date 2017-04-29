@@ -1,5 +1,6 @@
 package controller.scoreboard;
 
+import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXMLLoader;
@@ -33,17 +34,27 @@ public class BombCounter extends Label {
     /**
      * Increments the bomb count internally, which will change what the label
      * displays externally.
+     * <p>
+     * It's important that this be wrapped in a Platform.runLater so that it doesn't
+     * get in a fight with the JavaFX Application Thread. I know enough to know that
+     * it won't work without it, but I couldn't quite explain precisely why you
+     * can't change something without the JAT's permission.
      */
     public void increment() {
-        bombProperty.set(bombProperty.get() + 1);
+        Platform.runLater(() -> bombProperty.set(bombProperty.get() + 1));
     }
 
     /**
      * Decrements the bomb count internally, which will change what the label
      * displays externally.
+     * <p>
+     * It's important that this be wrapped in a Platform.runLater so that it doesn't
+     * get in a fight with the JavaFX Application Thread. I know enough to know that
+     * it won't work without it, but I couldn't quite explain precisely why you
+     * can't change something without the JAT's permission.
      */
     public void decrement() {
-        bombProperty.set(bombProperty.get() - 1);
+        Platform.runLater(() -> bombProperty.set(bombProperty.get() - 1));
     }
 
 //    @FXML

@@ -55,5 +55,8 @@ public class ScoreBoard extends BorderPane {
         clock.increment();
     }
 
+    public void startClock() {
+        clock.start();
+    }
 }
 
