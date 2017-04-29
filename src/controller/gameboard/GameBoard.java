@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -178,12 +179,17 @@ public class GameBoard extends BorderPane {
 
         //if player won
         if (winnerOrLoser.equals("winner")) {
-
+            Alert winner = new Alert(Alert.AlertType.NONE);
+            winner.setHeaderText("You won!");
+            winner.setContentText("You finished in " + time + " seconds.");
         }
 
 
         //if player lost
         if (winnerOrLoser.equals("loser")) {
+            Alert loser = new Alert(Alert.AlertType.NONE);
+            loser.setHeaderText("Sorry, you lost!");
+            loser.setContentText("Better luck next time!");
 
         }
 
