@@ -119,18 +119,21 @@ public class GameBoard extends BorderPane{
                 //Get Cell
                 Cell cell = (Cell) btn.getParent();
 
-                //Reveal contents
-                reveal(cell);
+                //Only reveal cells that are unmarked
+                if (Objects.equals(btn.getId(), "blank")) {
+                    //Reveal contents
+                    reveal(cell);
 
-                //If source contents is a mine
-                if (cell.isAMine()) {
-                    //Gameover
-                    // TODO: 4/28/17   gameover();
-                }
+                    //If source contents is a mine
+                    if (cell.isAMine()) {
+                        //Gameover
+                        // TODO: 4/28/17   gameover();
+                    }
 
-                //If 0
-                if(Objects.equals(cell.getContents().getText(), "0")) {
-                    exploreEmptiness(cell);
+                    //If 0
+                    if(Objects.equals(cell.getContents().getText(), "0")) {
+                        exploreEmptiness(cell);
+                    }
                 }
 
 

@@ -6,7 +6,7 @@ package controller.gameboard;
 public class Options {
     private static int cellCount = 400;
 
-    private static double bombPercentage = 0.25;
+    private static double bombPercentage = 0.05;
 
     private static int bombCount = (int) (cellCount * bombPercentage);
     

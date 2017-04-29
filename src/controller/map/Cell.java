@@ -70,6 +70,7 @@ public class Cell extends StackPane {
 
     private void initTapa() {
         tapa.getStyleClass().add("cell");
+        tapa.setId("blank");
 
         tapa.setShape(new Rectangle(CELL_SIZE, CELL_SIZE));
         tapa.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
