@@ -50,7 +50,7 @@ public class GameBoard extends BorderPane {
     /**
      * Keeps track of which cells have been revealed and which haven't
      */
-    private ObservableList<Cell> revealedList = FXCollections.observableArrayList();
+    private ObservableList<Cell> revealedList;
 
     /**
      * A handler that controls what happens when a user clicks a cell. A series of checks are made
@@ -74,6 +74,11 @@ public class GameBoard extends BorderPane {
      * Cycles the tapa through 3 possible marks and decrements or increments the flag/mine count accordingly.
      */
     private EventHandler<MouseEvent> rightClickEvent;
+
+    /**
+     * Helps us determine if the user has won yet.
+     */
+    private ListChangeListener<Cell> wonYet;
 
 
     /**
@@ -106,6 +111,9 @@ public class GameBoard extends BorderPane {
      * Sets up the click handler as well as other important game play
      */
     private void initGamePlay() {
+
+        revealedList = FXCollections.observableArrayList();
+
         //Make the listener first
         startClock = new InvalidationListener() {
             @Override
@@ -121,7 +129,7 @@ public class GameBoard extends BorderPane {
         revealedList.addListener(startClock);
 
         //This will help us determine if the user has won.
-        revealedList.addListener(new ListChangeListener<Cell>() {
+        wonYet = new ListChangeListener<Cell>() {
             @Override
             public void onChanged(Change<? extends Cell> c) {
 
@@ -131,7 +139,10 @@ public class GameBoard extends BorderPane {
                     gameover("winner");
                 }
             }
-        });
+        };
+
+
+        revealedList.addListener(wonYet);
 
 
 
