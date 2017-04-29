@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 
@@ -39,6 +40,7 @@ public class Cell extends StackPane {
     public enum Mark {
         BLANK, FLAG, QUESTIONABLE
     }
+
     //Initially, all should be blank
     private Mark mark = Mark.BLANK;
 
@@ -75,38 +77,17 @@ public class Cell extends StackPane {
         tapa.setShape(new Rectangle(CELL_SIZE, CELL_SIZE));
         tapa.setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
 
-
-        //Handle the investigation marking (right-clicks only)
-        tapa.setOnMouseClicked(event -> {
-
-            if (event.getButton() == MouseButton.SECONDARY) {
-            Button btn = (Button) event.getSource();
-            Cell cell = (Cell) btn.getParent();
-            System.out.println("RIGHT");
-                switch (cell.getMark()) {
-                    case BLANK:
-                        btn.setId("flagged");
-                        cell.setMark(Mark.FLAG);
-                        break;
-                    case FLAG:
-                        btn.setId("questionable");
-                        cell.setMark(Mark.QUESTIONABLE);
-                        break;
-                    case QUESTIONABLE:
-                        btn.setId("blank");
-                        cell.setMark(Mark.BLANK);
-                        break;
-                }
-            }
-
-        });
     }
 
 
-    public void setOnAction(EventHandler<ActionEvent> eventHandler) {
-        //I think I'll set it on the tapa because that's the clickable part
+    public void setClickEvents(EventHandler<ActionEvent> eventHandler, EventHandler<MouseEvent> rightClickHandler) {
+        //It may have been a poor decision, but I only set the left handler "onAction" because right clicks are never
+        //an action
         tapa.setOnAction(eventHandler);
+
+        tapa.setOnMouseClicked(rightClickHandler);
     }
+
     /**
      * Turns cell into a mine.
      */
@@ -117,6 +98,7 @@ public class Cell extends StackPane {
 
     /**
      * The hint tells the player how many of the 8 squares this cell is touching have a mine in them.
+     *
      * @param number the number of mines touched by this cell
      */
     public void setHint(String number) {

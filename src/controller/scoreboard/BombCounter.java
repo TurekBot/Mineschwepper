@@ -1,5 +1,6 @@
 package controller.scoreboard;
 
+import controller.gameboard.Options;
 import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -10,7 +11,7 @@ import java.io.IOException;
 
 public class BombCounter extends Label {
 
-    private IntegerProperty bombProperty = new SimpleIntegerProperty(0);
+    private IntegerProperty bombProperty = new SimpleIntegerProperty(Options.getBombCount());
 
     public BombCounter() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(

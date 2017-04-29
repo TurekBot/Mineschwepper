@@ -12,6 +12,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.TilePane;
 import javafx.util.Callback;
@@ -23,7 +25,7 @@ import java.util.Objects;
 /**
  * Contains the score board and the map. Also controls the game play?
  */
-public class GameBoard extends BorderPane{
+public class GameBoard extends BorderPane {
 
 
     /**
@@ -57,10 +59,21 @@ public class GameBoard extends BorderPane{
 
     /**
      * I'm using this in attempts to not duplicate code that need not be duplicated.
-     *
+     * <p>
      * I'll set this in the CellList class and then call it when necessary.
      */
     private static Callback<Cell, Void> exploreEmptinessCallback = null;
+
+    /**
+     * Merely starts the clock.
+     */
+    private InvalidationListener startClock;
+
+    /**
+     * Cycles the tapa through 3 possible marks and decrements or increments the flag/mine count accordingly.
+     */
+    private EventHandler<MouseEvent> rightClickEvent;
+
 
     /**
      * Called to define our exploreEmptiness routine from the context of inside of CellList.
@@ -92,15 +105,18 @@ public class GameBoard extends BorderPane{
      * Sets up the click handler as well as other important game play
      */
     private void initGamePlay() {
-
-        //This will help us know when the user has started
-        revealedList.addListener(new InvalidationListener() {
+        //Make the listener first
+        startClock = new InvalidationListener() {
             @Override
             public void invalidated(Observable observable) {
                 scoreBoard.startClock();
                 revealedList.removeListener(this);
             }
-        });
+        };
+
+        //Then add it.
+        //This will help us know when the user has started
+        revealedList.addListener(startClock);
 
         //This will help us determine if the user has won.
         revealedList.addListener(new ListChangeListener<Cell>() {
@@ -143,13 +159,43 @@ public class GameBoard extends BorderPane{
                     }
 
                     //If 0
-                    if(Objects.equals(cell.getContents().getText(), "0")) {
+                    if (Objects.equals(cell.getContents().getText(), "0")) {
                         exploreEmptiness(cell);
                     }
                 }
 
 
+            }
+        };
+    }
 
+    private void initRightClickHandler() {
+        rightClickEvent = new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.getButton() == MouseButton.SECONDARY) {
+
+                    //Change the mark and the counter if necessary
+                    Button btn = (Button) event.getSource();
+                    Cell cell = (Cell) btn.getParent();
+                    System.out.println("RIGHT");
+                    switch (cell.getMark()) {
+                        case BLANK:
+                            btn.setId("flagged");
+                            cell.setMark(Cell.Mark.FLAG);
+                            scoreBoard.decrementBombCounter();
+                            break;
+                        case FLAG:
+                            btn.setId("questionable");
+                            cell.setMark(Cell.Mark.QUESTIONABLE);
+                            break;
+                        case QUESTIONABLE:
+                            btn.setId("blank");
+                            cell.setMark(Cell.Mark.BLANK);
+                            scoreBoard.incrementBombCounter();
+                            break;
+                    }
+                }
             }
         };
     }
@@ -163,9 +209,10 @@ public class GameBoard extends BorderPane{
     /**
      * Reveals a cell by hiding the tapa. Adds the cell to the list of revealed cells; we need
      * to do this so we know when the user has revealed enough cells to win.
+     *
      * @param cell the cell being revealed
      */
-    protected void reveal(Cell cell) {
+    void reveal(Cell cell) {
         //Remove tapa
         Button tapa = cell.getTapa();
 
@@ -173,10 +220,12 @@ public class GameBoard extends BorderPane{
         System.out.println(cell.getContents().getText());
 
         if (tapa.isVisible()) {
-            tapa.setVisible(false);
+            if (cell.getMark() == Cell.Mark.BLANK) {
+                tapa.setVisible(false);
 
-            //Add cell to revealed list
-            revealedList.add(cell);
+                //Add cell to revealed list
+                revealedList.add(cell);
+            }
         }
         //Otherwise, don't add it: it's already invisible and on the list
     }
@@ -185,6 +234,7 @@ public class GameBoard extends BorderPane{
     void initialize() {
 
         initLeftClickHandler();
+        initRightClickHandler();
 
         //Set up map
         initCells();
@@ -192,23 +242,22 @@ public class GameBoard extends BorderPane{
         initGamePlay();
 
 
-
     }
 
     private void initCells() {
 
         //Make all the cells
-        for (int i = 0; i < Options.getCellCount(); i++){
+        for (int i = 0; i < Options.getCellCount(); i++) {
             Cell c = new Cell();
 
-            //Give each cell the handler it needs to function correctly during gameplay
-            c.setOnAction(leftClickEvent);
+            //Give each cell the handlers it needs to function correctly during game play
+            c.setClickEvents(leftClickEvent, rightClickEvent);
 
             cellList.add(c);
         }
 
         //Turn a certain percentage of them into bombs
-        for (int i = 0; i < Options.getBombCount(); i++){
+        for (int i = 0; i < Options.getBombCount(); i++) {
             cellList.get(i).setMine();
         }
 
