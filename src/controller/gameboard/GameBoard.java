@@ -58,7 +58,7 @@ public class GameBoard extends BorderPane{
      *
      * I'll set this in the CellList class and then call it when necessary.
      */
-    private Callback<Cell, Void> exploreEmptinessCallback = null;
+    private static Callback<Cell, Void> exploreEmptinessCallback = null;
 
     /**
      * Called to define our exploreEmptiness routine from the context of inside of CellList.
@@ -118,14 +118,12 @@ public class GameBoard extends BorderPane{
                 Button btn = (Button) event.getSource();
                 //Get Cell
                 Cell cell = (Cell) btn.getParent();
-                System.out.println("LEFT");
 
                 //Reveal contents
                 reveal(cell);
 
                 //If source contents is a mine
                 if (cell.isAMine()) {
-                    System.err.println("MINE!");
                     //Gameover
                     // TODO: 4/28/17   gameover();
                 }
@@ -156,8 +154,11 @@ public class GameBoard extends BorderPane{
         //Remove tapa
         Button tapa = cell.getTapa();
 
+        //For fun, log what it contains
+        System.out.println(cell.getContents().getText());
+
         if (tapa.isVisible()) {
-            setVisible(false);
+            tapa.setVisible(false);
 
             //Add cell to revealed list
             revealedList.add(cell);

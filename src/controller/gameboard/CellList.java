@@ -46,7 +46,7 @@ public class CellList extends ArrayList<Cell> {
                         Cell neighbor = neighborOnThe(d, you);
 
                         //Only consider the neighbor if they are visible
-                        if (neighbor.isVisible()) {
+                        if (neighbor.getTapa().isVisible()) {
                             //Case: Contents equals 0
                             if (Objects.equals(neighbor.getContents().getText(), "0")) {
                                 //hopefully this will call a new stack frame of this call back and perform recursion
