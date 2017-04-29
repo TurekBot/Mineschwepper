@@ -66,5 +66,9 @@ public class ScoreBoard extends BorderPane {
     public void decrementBombCounter() {
         bombCounter.decrement();
     }
+
+    public int stopTimer() {
+        return clock.stop();
+    }
 }
 

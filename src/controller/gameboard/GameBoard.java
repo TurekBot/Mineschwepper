@@ -155,7 +155,7 @@ public class GameBoard extends BorderPane {
                     //If source contents is a mine
                     if (cell.isAMine()) {
                         //Gameover
-                        // TODO: 4/28/17   gameover();
+                        gameover("loser");
                     }
 
                     //If 0
@@ -167,6 +167,48 @@ public class GameBoard extends BorderPane {
 
             }
         };
+    }
+
+    private void gameover(String win_lose) {
+        //Stop the timer
+        int time = scoreBoard.stopTimer();
+
+        revealBombs();
+
+
+        //if player won
+
+
+        //if player lost
+
+
+    }
+
+    private void revealBombs() {
+        //Reveal just the bombs
+        for (Cell c :
+                cellList) {
+            if (c.getMark() == Cell.Mark.FLAG || c.getMark() == Cell.Mark.QUESTIONABLE) {
+                if (c.isAMine()) {
+                    //Correctly Marked Bombs have a green background
+                    c.getStyleClass().add("correct");
+                } else {
+                    //Mismarked cells have a yellow background
+                    c.getStyleClass().add("mismarked");
+                }
+            }
+
+            if (c.getMark() == Cell.Mark.BLANK && c.isAMine()) {
+                //Unmarked bombs have a red background
+                c.getStyleClass().add("unmarked");
+            }
+
+            if (c.isAMine() || c.getStyleClass().contains("mismarked")) {
+                c.getTapa().setVisible(false);
+            }
+
+
+        }
     }
 
     private void initRightClickHandler() {

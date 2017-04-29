@@ -100,5 +100,17 @@
 }
 
 
+/*Game over results*/
+.correct {
+    -fx-background-color: green;
+}
+
+.unmarked {
+    -fx-background-color: red;
+}
+
+.mismarked {
+    -fx-background-color: gold;
+}
 
 

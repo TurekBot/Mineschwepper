@@ -91,4 +91,9 @@ public class Clock extends Label {
     public void start() {
         timer.scheduleAtFixedRate(countUp, 0, 1000);
     }
+
+    public int stop() {
+        timer.cancel();
+        return timeProperty.getValue();
+    }
 }
