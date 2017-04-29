@@ -12,9 +12,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.TilePane;
+import javafx.util.Callback;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
 
@@ -39,7 +39,8 @@ public class GameBoard extends BorderPane{
     /**
      * Keeps track of all of the cells; convenient access to them.
      */
-    private CellList cellList = new CellList();
+    //we pass the cellList "this" so it can define our explore emptiness method later
+    private CellList cellList = new CellList(this);
 
     /**
      * Keeps track of which cells have been revealed and which haven't
@@ -51,6 +52,23 @@ public class GameBoard extends BorderPane{
      * and the appropriate action is taken
      */
     private EventHandler<ActionEvent> leftClickEvent;
+
+    /**
+     * I'm using this in attempts to not duplicate code that need not be duplicated.
+     *
+     * I'll set this in the CellList class and then call it when necessary.
+     */
+    private Callback<Cell, Void> exploreEmptinessCallback = null;
+
+    /**
+     * Called to define our exploreEmptiness routine from the context of inside of CellList.
+     * This will let the GameBoard class reuse some of the components in the CellList class.
+     *
+     * @param callback defines what to do when you click a cell with a 0
+     */
+    void defineExploreEmptiness(Callback<Cell, Void> callback) {
+        exploreEmptinessCallback = callback;
+    }
 
 
     public GameBoard() {
@@ -113,9 +131,8 @@ public class GameBoard extends BorderPane{
                 }
 
                 //If 0
-                if(Objects.equals(cell.getContents(), "0")) {
-                    // TODO: 4/28/17  //Explore Emptiness
-
+                if(Objects.equals(cell.getContents().getText(), "0")) {
+                    exploreEmptiness(cell);
                 }
 
 
@@ -124,17 +141,28 @@ public class GameBoard extends BorderPane{
         };
     }
 
+    private void exploreEmptiness(Cell cell) {
+        //Call the callback: pray
+        exploreEmptinessCallback.call(cell);
+    }
+
+
     /**
      * Reveals a cell by hiding the tapa. Adds the cell to the list of revealed cells; we need
      * to do this so we know when the user has revealed enough cells to win.
      * @param cell the cell being revealed
      */
-    private void reveal(Cell cell) {
+    protected void reveal(Cell cell) {
         //Remove tapa
-        cell.getTapa().setVisible(false);
+        Button tapa = cell.getTapa();
 
-        //Add cell to revealed list
-        revealedList.add(cell);
+        if (tapa.isVisible()) {
+            setVisible(false);
+
+            //Add cell to revealed list
+            revealedList.add(cell);
+        }
+        //Otherwise, don't add it: it's already invisible and on the list
     }
 
     @FXML
