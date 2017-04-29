@@ -23,9 +23,14 @@ public class Mineschwepper extends Application {
 
         primaryStage.setScene(new Scene(gameBoard));
 
-        primaryStage.getIcons().add(new Image(
-                getClass().getResourceAsStream("../resources/Naval-Mine-Filled-100.png")
-        ));
+        try {
+            primaryStage.getIcons().add(new Image(
+                    getClass().getClassLoader().getResourceAsStream("resources/Naval-Mine-Filled-100.png")
+            ));
+        } catch (NullPointerException npe ) {
+            System.err.println("For some freaking reason I can't find the mine icon");
+            npe.printStackTrace();
+        }
 
         primaryStage.setTitle("Mineschwepper");
         primaryStage.setResizable(false);

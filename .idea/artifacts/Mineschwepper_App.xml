@@ -1,0 +1,28 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="Mineschwepper App">
+    <output-path>$PROJECT_DIR$/out/artifacts/Mineschwepper_App</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="start.Mineschwepper" />
+        <option name="convertCss2Bin" value="true" />
+        <option name="description" value="An imitation of the classic game minesweeper." />
+        <option name="height" value="641" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="icons">
+          <JavaFxApplicationIcons>
+            <option name="windowsIcon" value="$PROJECT_DIR$/src/resources/naval_mine_filled_100_LRG_icon.ico" />
+          </JavaFxApplicationIcons>
+        </option>
+        <option name="nativeBundle" value="exe" />
+        <option name="title" value="Mineschwepper" />
+        <option name="vendor" value="TurekBot" />
+        <option name="version" value="1.0" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="Mineschwepper.jar">
+        <element id="module-output" name="Turek-Bradley-Assn8" />
+      </element>
+    </root>
+  </artifact>
+</component>
