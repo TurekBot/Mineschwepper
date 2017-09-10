@@ -33,6 +33,7 @@ public class Mineschwepper extends Application {
         }
 
         primaryStage.setTitle("Mineschwepper");
+        primaryStage.setOnCloseRequest(onClose -> System.exit(0));
         primaryStage.setResizable(false);
         primaryStage.sizeToScene();
         primaryStage.show();
